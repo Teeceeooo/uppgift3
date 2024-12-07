@@ -20,13 +20,20 @@ const GET_CHARACTERS = gql`
     }
 `
 
+interface Character {
+    name: string
+    birthYear: string
+    gender: string
+}
+
 const CharacterFetcher: React.FC = () => {
     const { loading, error, data } = useQuery(GET_CHARACTERS, { client })
-    const [searchQuery, setSearchQuery] = useState('')
-    const [selectedCharacter, setSelectedCharacter] = useState<any>(null)
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [searchQuery, setSearchQuery] = useState<string>('')
+    const [selectedCharacter, setSelectedCharacter] =
+        useState<Character | null>(null)
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
-    const openModal = (character: any) => {
+    const openModal = (character: Character) => {
         setSelectedCharacter(character)
         setIsModalOpen(true)
     }
@@ -39,8 +46,8 @@ const CharacterFetcher: React.FC = () => {
     if (loading) return <p>Loading characters...</p>
     if (error) return <p>Error: {error.message}</p>
 
-    const filteredCharacters = data.allPeople.people.filter(
-        (person: { name: string }) =>
+    const filteredCharacters: Character[] = data?.allPeople.people.filter(
+        (person: Character) =>
             person.name.toLowerCase().includes(searchQuery.toLowerCase())
     )
 
@@ -53,26 +60,19 @@ const CharacterFetcher: React.FC = () => {
                 variant="secondary"
             />
             {filteredCharacters.length > 0 ? (
-                filteredCharacters.map(
-                    (person: {
-                        name: string
-                        birthYear: string
-                        gender: string
-                    }) => (
-                        <Card
-                            key={person.name}
-                            title={person.name}
-                            subtitle={`Birth Year: ${person.birthYear}`}
-                            description={`Gender: ${person.gender}`}
-                            onClick={() => openModal(person)}
-                        />
-                    )
-                )
+                filteredCharacters.map((person: Character) => (
+                    <Card
+                        key={person.name}
+                        title={person.name}
+                        subtitle={`Birth Year: ${person.birthYear}`}
+                        description={`Gender: ${person.gender}`}
+                        onClick={() => openModal(person)}
+                    />
+                ))
             ) : (
                 <p>No characters found.</p>
             )}
 
-            {}
             <Modal
                 isOpen={isModalOpen}
                 onClose={closeModal}
