@@ -1,95 +1,73 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+import React from 'react'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import StatCard from './components/StatCard'
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+const Home: React.FC = () => {
+    return (
+        <div
+            style={{
+                paddingTop: '60px',
+                paddingBottom: '40px',
+                fontFamily: 'Arial, sans-serif',
+                textAlign: 'center'
+            }}
+        >
+            <Header />
+            <main style={{ padding: '20px' }}>
+                <h1>Welcome to the Star Wars Explorer</h1>
+                <p
+                    style={{
+                        marginTop: '20px',
+                        fontSize: '18px',
+                        lineHeight: '1.6'
+                    }}
+                >
+                    In this app you can learn more about the characters, films,
+                    planets and you can even take a quiz to test your Star Wars
+                    knowledge.
+                </p>
+                <ul
+                    style={{
+                        listStyleType: 'disc',
+                        margin: '20px auto',
+                        padding: '0',
+                        maxWidth: '600px',
+                        textAlign: 'left',
+                        fontSize: '16px',
+                        lineHeight: '1.8'
+                    }}
+                >
+                    <li>
+                        <strong>Characters:</strong> Learn about your favorite
+                        characters & their background.
+                    </li>
+                    <li>
+                        <strong>Films:</strong> Information about all the Star
+                        Wars films, including release dates and directors.
+                    </li>
+                    <li>
+                        <strong>Planets:</strong> Planets of the Star Wars
+                        universe and their population.
+                    </li>
+                    <li>
+                        <strong>Quiz:</strong> Test your Star Wars knowledge
+                        with an interactive quiz!
+                    </li>
+                </ul>
+                <p style={{ marginTop: '20px', fontSize: '16px' }}>
+                    Use the navigation bar above to explore different sections
+                    of the app. May the Force be with you!
+                </p>
+                <StatCard label="Characters" value={82} color="#28A745" />
+                <StatCard label="Films" value={6} color="#FFC107" />
+                <StatCard label="Planets" value={60} color="#17A2B8" />
+            </main>
+            <Footer />
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    )
 }
+
+export default Home
